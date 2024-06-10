@@ -16,3 +16,20 @@ h1{
     box-sizing: border-box;
     border-radius: 6px;
 }
+.menu{
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    background: greenyellow;
+    padding: 20px;
+    margin-top: 0;
+}
+.menu a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+.copy{
+    text-align: center;
+    margin-top: 10px;
+}

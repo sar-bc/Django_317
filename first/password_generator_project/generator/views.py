@@ -3,11 +3,16 @@ import random
 from django.shortcuts import render
 from django.http.response import HttpResponse
 
+menu = [
+    {'title': 'Главная', 'url': '/'},
+    {'title': 'Как это работает?', 'url': '/info'},
+]
+
 
 # Create your views here.
 def home(request):
     lst = list(range(6, 15))
-    return render(request, 'generator/home.html', {'lst': lst})
+    return render(request, 'generator/home.html', {'lst': lst, 'menu': menu})
 
 
 def password(request):
@@ -28,4 +33,8 @@ def password(request):
     psw = ''
     for i in range(length):
         psw += random.choice(char)
-    return render(request, 'generator/password.html', {'password': psw})
+    return render(request, 'generator/password.html', {'password': psw, 'menu': menu})
+
+
+def info(request):
+    return render(request, 'generator/info.html', {'menu': menu})
