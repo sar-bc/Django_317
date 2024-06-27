@@ -3,5 +3,13 @@
 {% block content %}
 
 <h1>Задачи:</h1>
-
+<ul>
+    {%for todo in todos %}
+    <li>
+        {
+        {{todo.title}}
+        {{todo.memo}}
+    </li>
+    {%endfor%}
+</ul>
 {% endblock %}

@@ -66,7 +66,7 @@ button{
     text-align: center;
 }
 
-input{
+input, textarea{
     width: 100%;
     padding: 6px 10px;
     box-sizing: border-box;
