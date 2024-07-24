@@ -8,6 +8,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 def projects(request):
     pr, search_query = search_projects(request)
+
     page = request.GET.get('page')
     results = 3
     paginator = Paginator(pr, results)
@@ -27,6 +28,7 @@ def projects(request):
         right_index = paginator.num_pages + 1
 
     custom_range = range(1, right_index)
+
     context = {
         'projects': pr,
         'search_query': search_query,
@@ -85,3 +87,5 @@ def delete_project(request, pk):
 
     context = {'object': project}
     return render(request, 'projects/delete.html', context)
+
+

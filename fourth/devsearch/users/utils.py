@@ -1,13 +1,14 @@
-from .models import Skill, Profile
+from .models import Profile, Skill
 from django.db.models import Q
 
 
 def search_profiles(request):
     search_query = ""
+
     if request.GET.get("search_query"):
         search_query = request.GET.get("search_query")
 
-    skills = Skill.objects.filter(name__icontains=search_query)
+    skills = Skill.objects.filter(name__icontains=search_query)  # iexact - точное регистронезависимое совпадение
 
     prof = Profile.objects.distinct().filter(
         Q(name__icontains=search_query) |
@@ -16,4 +17,3 @@ def search_profiles(request):
         Q(skill__in=skills)
     )
     return prof, search_query
-
