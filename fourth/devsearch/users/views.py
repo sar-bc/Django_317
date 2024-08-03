@@ -178,3 +178,10 @@ def view_message(request, pk):
         "message": message
     }
     return render(request, 'users/message.html', context)
+
+
+def send_message(request, pk):
+    context = {
+        'dev': pk
+    }
+    return render(request, 'users/send_message.html', context)
