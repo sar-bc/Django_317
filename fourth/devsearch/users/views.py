@@ -4,7 +4,7 @@ from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
-from .forms import CustomUserCreationForm, ProfileForm, SkillForm
+from .forms import CustomUserCreationForm, ProfileForm, SkillForm, MessageForm
 from django.contrib.auth.decorators import login_required
 from .utils import search_profiles, paginate_profiles
 
@@ -180,8 +180,37 @@ def view_message(request, pk):
     return render(request, 'users/message.html', context)
 
 
-def send_message(request, pk):
+def send_message(request, id):
+    profile = Profile.objects.get(id=id)
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            mess = form.save(commit=False)
+            if request.user.is_authenticated:
+                mess.sender = request.user.profile
+            else:
+                mess.sender = None
+            mess.recipient = profile
+            form.save()
+            messages.success(request, "Message sent!")
+            return redirect('user_profile', pk=id)
+    else:
+
+        if request.user.is_anonymous:
+            data = {
+                'sender_': '',
+                'recipient_': profile.name
+            }
+        else:
+            data = {
+                'sender_': request.user.profile.name,
+                'recipient_': profile.name,
+                'name': request.user.profile.name,
+                'email': request.user.profile.email,
+            }
+
     context = {
-        'dev': pk
+        'dev': id,
+        'form': MessageForm(initial=data)
     }
     return render(request, 'users/send_message.html', context)
