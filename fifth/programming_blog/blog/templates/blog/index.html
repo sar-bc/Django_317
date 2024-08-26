@@ -1,5 +1,5 @@
 {% extends 'blog/base.html' %}
-
+{%load static %}
 {% block content %}
 
 <h1>{{ title }}</h1>
@@ -7,10 +7,12 @@
 <ul>
     {% for p in posts %}
     <li>
-        <p class="first">Категория: {{ p.cat }}</p>
+        <p class="first">Категория: {{p.cat}}</p>
         <div class="text">
             {% if p.photo %}
             <img src="{{ p.photo.url }}" alt="" class="image">
+            {%else%}
+            <img src="{%static 'blog/default.jpg'%}" alt="" class="image">
             {% endif %}
             <h2><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></h2>
             <p>{{ p.content|truncatewords:50 }}</p>
