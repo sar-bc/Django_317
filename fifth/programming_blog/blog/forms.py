@@ -19,8 +19,6 @@ class RegisterUserForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields.pop('usable_password', None)
-        # for i in self.fields:
-        #     print(i)
 
 
 class AddPostForm(forms.ModelForm):
