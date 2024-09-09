@@ -562,6 +562,7 @@ python manage.py migrate
 
 django-admin startproject devsearch
 python manage.py startapp projects
+python manage.py startapp users
 
 OneToOneField - один к одному
 ForeignKey - один ко многим
@@ -578,3 +579,102 @@ Project.objects.filter(title__startswith="Website")
 Project.objects.filter(title__contains="site")
 Project.objects.filter(title__contains="land")
 Project.objects.exclude(title__startswith="Website")
+
+str - любая непустая непустая строка, исключая "/"
+int - любое положительное число, включая 0
+slug - латиница ASCII, символ дефиса и подчеркивание
+uuid - цифры, малые латинские символы ACSII, дефис
+path - любая непустая непустая строка, включая "/"
+
+
+templatetags
+	__init__.py
+	blog_tags.py
+
+
+http://127.0.0.1:8000/projects/?page=1
+http://127.0.0.1:8000/projects/?page=2
+
+http://127.0.0.1:8000/projects/?search_query=web
+http://127.0.0.1:8000/projects/?page=2
+
+http://127.0.0.1:8000/projects/?search_query=web&page=2
+
+http://127.0.0.1:8000/projects/?search_query=web
+http://127.0.0.1:8000/projects/?search_query=web&page=2
+
+
+message_form.html
+
+
+django-admin startproject programming_blog
+python manage.py startapp blog
+
+
+str - любая непустая строка
+int - любое положительное число, включая 0
+slug - латиница ASCII, также дефис и подчеркивание
+uuid - цифры, малые литинские символы ASCII и дефис
+path - любая непустая строка, включает символ '/'
+
+templatetags
+	__init__.py
+	blog_tags.py
+	
+python manage.py collectstatic
+
+
+git init
+git add -A
+git commit -m "blog"
+
+git clone https://github.com/Helen-prog/blog.git
+
+
+mkvirtualenv --python=/usr/bin/python3.10 blogenv
+mkvirtualenv --python=/usr/bin/python3.9 blogenv
+
+
+deactivate 
+- для выхода из виртуального окружения
+
+workon blogenv
+- для повторного входа
+
+
+pip install django
+pip install pillow
+pip install django-simple-captcha
+pip install django-ckeditor
+
+
+pwd
+- просмотр пути к папке
+
+https://helenkozovyakina.pythonanywhere.com/
+
+/home/HelenKozovyakina/blog
+https://helenkozovyakina.pythonanywhere.com/
+
+
+
+django-admin startproject landing_page
+python manage.py startapp cms
+python manage.py startapp price
+python manage.py startapp crm
+
+
+@BotFather
+
+Бот обработчик заявок с сайта
+testsendbot_message_bot
+7338072230:AAGsyxl_Z5u9yE8DH55jedquCiIc761bgwk
+-4504235080
+
+https://api.telegram.org/bot<token>/НАЗВАНИЕ_МЕТОДА
+
+https://api.telegram.org/bot7338072230:AAGsyxl_Z5u9yE8DH55jedquCiIc761bgwk/sendMessage?chat_id=-4504235080&text=тест
+
+@get_id_bot
+
+/my_id@get_id_bot
