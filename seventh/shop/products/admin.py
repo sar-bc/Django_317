@@ -17,7 +17,7 @@ class ProductCategoryAdmin(admin.ModelAdmin):
         return new_urls + urls
 
     def upload_csv(self, request):
-        if request.method == 'POST':
+        if request.method == "POST":
             csv_file = request.FILES['csv_uploader']
 
             if not csv_file.name.endswith('.csv'):
@@ -25,21 +25,21 @@ class ProductCategoryAdmin(admin.ModelAdmin):
                 return redirect('.')
 
             file_data = csv_file.read().decode("utf-8")
-
             csv_data = file_data.split("\n")
+
             for x in csv_data:
                 fields = x.split(",")
                 # print(fields[1])
                 created = ProductCategory.objects.update_or_create(
-                    id=fields[0], name=fields[1], description=fields[2]
+                    id=fields[0],
+                    name=fields[1],
+                    description=fields[2]
                 )
             return redirect('admin:index')
 
         form = CsvImportForm()
-        data = {
-            'form': form
-        }
-        return render(request, 'admin/csv_uploader.html', data)
+        data = {"form": form}
+        return render(request, "admin/csv_uploader.html", data)
 
 
 class PhotoAdd(admin.StackedInline):
@@ -59,7 +59,7 @@ class ProductAdmin(admin.ModelAdmin):
         return new_urls + urls
 
     def upload_csv(self, request):
-        if request.method == 'POST':
+        if request.method == "POST":
             csv_file = request.FILES['csv_uploader']
 
             if not csv_file.name.endswith('.csv'):
@@ -67,12 +67,11 @@ class ProductAdmin(admin.ModelAdmin):
                 return redirect('.')
 
             file_data = csv_file.read().decode("utf-8")
-
             csv_data = file_data.split("\n")
 
             for x in csv_data:
                 fields = x.split(",")
-                # print(fields)
+                print(fields)
                 created = Product.objects.update_or_create(
                     id=fields[0],
                     name=fields[1],
@@ -82,15 +81,12 @@ class ProductAdmin(admin.ModelAdmin):
                     price=fields[5],
                     quantity=fields[6],
                     category=ProductCategory(fields[7][0]),
-
                 )
             return redirect('admin:index')
 
         form = CsvImportForm()
-        data = {
-            'form': form
-        }
-        return render(request, 'admin/csv_uploader.html', data)
+        data = {"form": form}
+        return render(request, "admin/csv_uploader.html", data)
 
 
 class PhotoAdmin(admin.ModelAdmin):
@@ -102,7 +98,7 @@ class PhotoAdmin(admin.ModelAdmin):
         return new_urls + urls
 
     def upload_csv(self, request):
-        if request.method == 'POST':
+        if request.method == "POST":
             csv_file = request.FILES['csv_uploader']
 
             if not csv_file.name.endswith('.csv'):
@@ -110,7 +106,6 @@ class PhotoAdmin(admin.ModelAdmin):
                 return redirect('.')
 
             file_data = csv_file.read().decode("utf-8")
-
             csv_data = file_data.split("\n")
 
             for x in csv_data:
@@ -119,16 +114,13 @@ class PhotoAdmin(admin.ModelAdmin):
                 created = Photo.objects.update_or_create(
                     id=fields[0],
                     product=Product(fields[1]),
-                    add_photo=fields[2][:-1],
-
+                    add_photo=fields[2][:-1]
                 )
             return redirect('admin:index')
 
         form = CsvImportForm()
-        data = {
-            'form': form
-        }
-        return render(request, 'admin/csv_uploader.html', data)
+        data = {"form": form}
+        return render(request, "admin/csv_uploader.html", data)
 
 
 admin.site.register(ProductCategory, ProductCategoryAdmin)

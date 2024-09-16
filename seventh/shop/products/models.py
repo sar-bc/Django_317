@@ -35,7 +35,7 @@ class Photo(models.Model):
     add_photo = models.ImageField(upload_to="products_images/add/", blank=True, verbose_name="Фото")
 
     def __str__(self):
-        return f'{self.id}'
+        return str(self.id)
 
     class Meta:
         verbose_name = "изображение"
